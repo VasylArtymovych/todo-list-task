@@ -15,7 +15,7 @@ const Modal: React.FC<ModalProps> = (props) => {
         <div className="modal">
           <h2 className="modal-title">{props.content.title}</h2>
           <p className="modal-descr">Description:</p>
-          <p>{props.content.text}</p>
+          <p className="modal-text">{props.content.text}</p>
           <div className="modal-status">
             <span>Status: </span>
             <input type="checkbox" defaultChecked={props.content.status} />

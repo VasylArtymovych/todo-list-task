@@ -11,8 +11,7 @@ interface TodoItemProps {
 const TodoItem: React.FC<TodoItemProps> = ({ todo, dispatch }) => {
   const { isOpen, openModal, closeModal } = useModal();
 
-  const handleChangeStatus = (e: React.SyntheticEvent) => {
-    e.stopPropagation();
+  const handleChangeStatus = () => {
     dispatch({ type: ActionTypes.TOGGLE_STATUS, payload: todo });
   };
 
@@ -26,8 +25,10 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, dispatch }) => {
           <input
             type="checkbox"
             checked={todo.status}
-            onChange={() => {}}
-            onClick={handleChangeStatus}
+            onChange={handleChangeStatus}
+            onClick={(e: React.SyntheticEvent) => {
+              e.stopPropagation();
+            }}
           />
         </td>
       </tr>

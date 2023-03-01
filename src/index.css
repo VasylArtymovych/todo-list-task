@@ -87,11 +87,16 @@ td {
 
 .modal-title {
   text-align: center;
+  overflow-wrap: break-word;
 }
 
 .modal-descr {
   font-size: 16px;
   font-weight: bold;
+}
+
+.modal-text {
+  overflow-wrap: break-word;
 }
 
 .modal-status {
