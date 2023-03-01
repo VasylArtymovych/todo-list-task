@@ -26,6 +26,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, dispatch }) => {
           <input
             type="checkbox"
             checked={todo.status}
+            onChange={() => {}}
             onClick={handleChangeStatus}
           />
         </td>
