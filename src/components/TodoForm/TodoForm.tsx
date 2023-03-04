@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 import { useTodos } from 'hooks';
 import { ActionTypes } from 'types';
-import { titleInputStyle, descrInputStyle } from 'utils';
+import { inputStyle } from 'utils';
 
 const TodoForm: React.FC = () => {
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
+  const [formData, setFormData] = useState({ title: '', text: '' });
   const [error, setError] = useState(false);
   const { dispatch } = useTodos();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    const form = e.currentTarget as HTMLFormElement;
+    const target = e.target as typeof e.target & {
+      title: { value: string };
+      description: { value: string };
+    };
+    const title = target.title.value;
+    const text = target.description.value;
+    setFormData({ title, text });
+
     if (title.length === 0 || text.length === 0) {
       setError(true);
     } else {
@@ -19,9 +27,8 @@ const TodoForm: React.FC = () => {
         text,
       };
       dispatch({ type: ActionTypes.CREATE, payload: todoData });
-      setTitle('');
-      setText('');
       setError(false);
+      form.reset();
     }
   };
 
@@ -33,16 +40,13 @@ const TodoForm: React.FC = () => {
         </label>
         <input
           type="text"
+          name="title"
           id="title"
-          value={title}
           placeholder="Enter title"
           className="input"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setTitle(e.target.value);
-          }}
-          style={{ border: titleInputStyle(error, title) }}
+          style={{ border: inputStyle(error, formData.title) }}
         />
-        {error && title.length === 0 ? (
+        {error && formData.title.length === 0 ? (
           <p className="error">This field is empty</p>
         ) : (
           ''
@@ -56,15 +60,12 @@ const TodoForm: React.FC = () => {
         <input
           type="text"
           id="description"
-          value={text}
+          name="description"
           placeholder="Enter description"
           className="input"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setText(e.target.value);
-          }}
-          style={{ border: descrInputStyle(error, text) }}
+          style={{ border: inputStyle(error, formData.text) }}
         />
-        {error && text.length === 0 ? (
+        {error && formData.text.length === 0 ? (
           <p className="error">This field is empty</p>
         ) : (
           ''

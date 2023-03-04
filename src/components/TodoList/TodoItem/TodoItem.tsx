@@ -1,6 +1,6 @@
 import Modal from 'components/Modal/Modal';
 import { useModal } from 'hooks/modal';
-import React from 'react';
+import React, { memo } from 'react';
 import { ActionTypes, IDispatch, ITodo } from 'types';
 
 interface TodoItemProps {
@@ -8,7 +8,8 @@ interface TodoItemProps {
   dispatch: IDispatch;
 }
 
-const TodoItem: React.FC<TodoItemProps> = ({ todo, dispatch }) => {
+// Use memo to prevent render all todos when add or delete one!!!
+const TodoItem: React.FC<TodoItemProps> = memo(({ todo, dispatch }) => {
   const { isOpen, openModal, closeModal } = useModal();
 
   const handleChangeStatus = () => {
@@ -17,7 +18,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, dispatch }) => {
 
   return (
     <>
-      <tr onClick={openModal}>
+      <tr data-id={todo.id} onClick={openModal}>
         <td>{todo.id}</td>
         <td>{todo.title}</td>
         <td>{todo.text}</td>
@@ -36,6 +37,6 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, dispatch }) => {
       <Modal isOpen={isOpen} onCloseModal={closeModal} content={todo} />
     </>
   );
-};
+});
 
 export default TodoItem;
