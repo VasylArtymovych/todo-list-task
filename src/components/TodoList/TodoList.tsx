@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTodos } from 'hooks';
 import TodoItem from './TodoItem/TodoItem';
+import './TodoList.css';
 
 const TodoList: React.FC = () => {
   const { state, dispatch } = useTodos();

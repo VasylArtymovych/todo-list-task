@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTodos } from 'hooks';
 import { ActionTypes } from 'types';
 import { inputStyle } from 'utils';
+import './TodoForm.css';
 
 const TodoForm: React.FC = () => {
   const [formData, setFormData] = useState({ title: '', text: '' });

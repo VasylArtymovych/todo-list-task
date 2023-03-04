@@ -1,0 +1,16 @@
+table {
+  width: 650px;
+  padding: 20px;
+}
+
+th,
+td {
+  overflow: hidden;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 150px;
+  padding: 10px;
+  text-align: center;
+  background-color: rgb(119, 116, 116);
+  text-overflow: ellipsis;
+}
